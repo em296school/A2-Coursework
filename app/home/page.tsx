@@ -2,20 +2,27 @@
 
 import { Button, Text, Stack } from '@mantine/core';
 import { useState } from 'react';
+import Loading from './loading';
 
 export default function Home() {
   const [apiResponse, setApiResponse] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleFetch = async () => {
+    setLoading(true);
     try {
       const res = await fetch('/api/test');
       const data = await res.json();
       setApiResponse(data.message);
     } catch (error) {
       setApiResponse(null);
-    } 
+    } finally {
+      setLoading(false);
+    }
   };
-  return (
+  return loading ? (
+    <Loading />
+  ) : (
     <div
       style={{
         display: 'flex',
@@ -35,6 +42,7 @@ export default function Home() {
           style={{
             width: '100px',
           }}
+          loading={loading}
         >
           Fetch API
         </Button>
