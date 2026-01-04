@@ -1,11 +1,6 @@
 'use client';
 
-import {
-  Button,
-  Text,
-  Stack,
-  Skeleton,
-} from '@mantine/core';
+import { Button, Text, Stack, Skeleton } from '@mantine/core';
 import { useState } from 'react';
 
 export default function Home() {
@@ -35,13 +30,9 @@ export default function Home() {
     >
       <Stack justify="center" align="center" style={{ height: '100%' }}>
         <div style={{ height: '30px', display: 'flex', alignItems: 'center' }}>
-          {loading ? (
-            <Skeleton h={30} />
-          ) : apiResponse ? (
-            <Text style={{ maxHeight: '30px' }}>
-              {JSON.stringify(apiResponse, null, 2)}
-            </Text>
-          ) : null}
+          <Text style={{ maxHeight: '30px' }}>
+            {apiResponse ? JSON.stringify(apiResponse, null, 2) : <Skeleton height={30} width={200} />}
+          </Text>
         </div>
         <Button
           onClick={handleFetch}
