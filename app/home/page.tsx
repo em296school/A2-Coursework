@@ -1,23 +1,19 @@
 'use client';
 
-import { Button, Text, Stack, Skeleton } from '@mantine/core';
+import { Button, Text, Stack } from '@mantine/core';
 import { useState } from 'react';
 
 export default function Home() {
   const [apiResponse, setApiResponse] = useState(null);
-  const [loading, setLoading] = useState(false);
 
   const handleFetch = async () => {
-    setLoading(true);
     try {
       const res = await fetch('/api/test');
       const data = await res.json();
       setApiResponse(data.message);
     } catch (error) {
       setApiResponse(null);
-    } finally {
-      setLoading(false);
-    }
+    } 
   };
   return (
     <div
@@ -31,7 +27,7 @@ export default function Home() {
       <Stack justify="center" align="center" style={{ height: '100%' }}>
         <div style={{ height: '30px', display: 'flex', alignItems: 'center' }}>
           <Text style={{ maxHeight: '30px' }}>
-            {apiResponse ? JSON.stringify(apiResponse, null, 2) : <Skeleton height={30} width={200} />}
+            {apiResponse ? JSON.stringify(apiResponse, null, 2) : 'No response.'}
           </Text>
         </div>
         <Button
@@ -39,9 +35,8 @@ export default function Home() {
           style={{
             width: '100px',
           }}
-          loading={loading}
         >
-          Fetch API Response
+          Fetch API
         </Button>
       </Stack>
     </div>
