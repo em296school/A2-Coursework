@@ -5,5 +5,5 @@ export default function Home() {
     <div>
       <Button>Vercel authenticated with Git</Button>
     </div>
-  )
+  );
 }
