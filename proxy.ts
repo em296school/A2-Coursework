@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { middlewareMatcher, rootDomain } from './config/constants';
+import { rootDomain } from './config/constants';
 
 // RegEX expression which tells NextJS what formats will trigger middleware routing.
 export const config = {
-    matcher: middlewareMatcher,
+    matcher: "/((?!api|_next|_static|_vercel)[\\w-]+\\.\\w+)",
 };
 
 // Necessary middleware function where we handle routing with subdomains
