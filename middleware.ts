@@ -24,6 +24,6 @@ export default function middleware(req: NextRequest) {
   }
 
   // Subdomain -> /apps/[subdomain]
-  url.pathname = `/apps/${subdomain}`;
+  url.pathname = `/apps/${subdomain}${url.pathname}`;
   return NextResponse.rewrite(url);
 }
