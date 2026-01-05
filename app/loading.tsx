@@ -1,9 +1,8 @@
 import { Box, Skeleton, Stack } from '@mantine/core';
 
-export default function Home() {
+export default function Loading() {
   return (
     <div
-      className="fade-in"
       style={{
         display: 'flex',
         justifyContent: 'center',
