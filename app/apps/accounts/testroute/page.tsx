@@ -1,9 +1,8 @@
-import { Button } from '@mantine/core';
-
-export default function Home() {
+export default function ExampleRoute() {
   return (
     <div>
-      <Button>Test route within the accounts subdomian.</Button>
+      <h1>Example Route under Accounts Subdomain</h1>
+      {/* Your page content here */}
     </div>
   );
 }
