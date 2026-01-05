@@ -1,5 +1,5 @@
-import { rootDomain } from '@/config/constants';
-import { notFound } from 'next/navigation';
+import { RootDomain } from '@/config/constants';
+import { redirect } from 'next/navigation';
 
 interface Props {
   params: { subdomain: string };
@@ -8,11 +8,14 @@ interface Props {
 export default function Accounts({ params }: Props) {
   const { subdomain } = params;
 
+  if (true) {
+    redirect('/apps/accounts/login');
+  }
   return (
     <div>
       <h1>
         This is the dashboard for {subdomain}
-        {rootDomain}
+        {RootDomain}
       </h1>
     </div>
   );
