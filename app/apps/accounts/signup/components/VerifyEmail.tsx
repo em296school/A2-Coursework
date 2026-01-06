@@ -1,14 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
-export default async function VerifyEmail({
-  challenge,
-}: {
-  challenge: string;
-}) {
+export default function VerifyEmail({ challenge }: { challenge: string }) {
   const [fetched, setFetchState] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const hasFetchedRef = useRef(false);
 
   useEffect(() => {
+    if (hasFetchedRef.current) {
+      return;
+    }
+    hasFetchedRef.current = true;
+
     const verifyEmail = async () => {
       try {
         const response = await fetch(
@@ -30,8 +32,6 @@ export default async function VerifyEmail({
   }, [challenge, fetched]);
 
   return (
-    <div>
-      {fetched && <p>Fetched!</p> || <p>Verifying your email...</p>}
-    </div>
+    <div>{(fetched && <p>Fetched!</p>) || <p>Verifying your email...</p>}</div>
   );
 }
