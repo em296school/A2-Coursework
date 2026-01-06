@@ -1,0 +1,35 @@
+/*
+Handles the layout and styling for groups of elements on the login page,
+such as input fields and buttons, ensuring responsiveness and smooth
+transitions between different screen sizes.
+*/
+.group {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    transition: gap 200ms ease, align-items 200ms ease;
+}
+
+@keyframes stackIn {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 600px) {
+    .group {
+        align-items: flex-start;
+        gap: 1rem;
+        animation: stackIn 280ms ease both;
+    }
+
+    .group>* {
+        animation: stackIn 320ms ease both;
+    }
+}

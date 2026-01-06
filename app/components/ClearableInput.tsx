@@ -27,7 +27,10 @@ export default function ClearableInput(props: ClearableInputProps) {
       {...inputProps}
       rightSection={
         <CloseButton
-          onClick={() => setValue('')}
+          onClick={() => {
+            const blankValue = '';
+            setValue(blankValue);
+          }}
           style={{
             opacity: props.value ? 1 : 0,
             transition: 'opacity 150ms ease-in-out',

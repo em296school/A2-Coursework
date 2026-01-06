@@ -19,6 +19,10 @@ type UnionInputNecessaries = {
     m?: StyleProp<MantineSpacing>;
     style?: React.CSSProperties;
     onBlur?: () => void;
+    variant?: 'filled' | 'default' | 'unstyled' | 'outline';
+    styles?: Record<string, React.CSSProperties>;
+    classNames?: Record<string, string>;
+    name?: string;
 }
 
 // We omit the rightSection prop as this is hardcoded within the ClearableInput component,

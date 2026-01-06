@@ -3,7 +3,7 @@
 /**
  * @component PasswordInputStrength
  * Password input component with strength indicator and requirements checklist.
- * 
+ *
  * @author Ethan Mahon (Candidate Number: 9093) | A2 Computer Science Coursework
  * @memberof AccountsApp
  */
@@ -11,11 +11,9 @@
 import { useState } from 'react';
 import { IconX, IconCheck, IconLock } from '@tabler/icons-react';
 import { PasswordInput, Progress, Text, Popover, Box } from '@mantine/core';
-import { PasswordStrongRequirements } from '@/config/constants';
+import { PasswordStrongRequirements } from '@/config/auth.config';
 import PasswordInputProps from '../types/PasswordInput';
-
-// Constant variables
-const icons__lockIcon = <IconLock size={18} stroke={1.5} />;
+import AuthenticationWrapper from '../../components/AuthenticationWrapper';
 
 // Component to display individual password requirement with status icon
 function PasswordRequirement({
@@ -56,8 +54,8 @@ function getStrength(password: string) {
 
 /**
  * PasswordInputStrength Component
- * 
- * @sourcef /login/page.tsx
+ *
+ * @sourcef /signup/page.tsx
  * @param props: PasswordInputProps
  * @returns Password input component with strength indicator and requirements checklist.
  */
@@ -79,6 +77,15 @@ export default function PasswordInputStrength(props: PasswordInputProps) {
   const strength = getStrength(value);
   const color = strength === 100 ? 'teal' : strength > 50 ? 'yellow' : 'red';
 
+  // Rerender the lock icon for the left section based on strength
+  const icons__lockIcon = (
+    <IconLock
+      size={18}
+      stroke={1.5}
+      color={strength === 100 ? 'var(--input-success-color)' : undefined}
+    />
+  );
+
   // Render the PasswordInput component
   return (
     <Popover
@@ -92,15 +99,31 @@ export default function PasswordInputStrength(props: PasswordInputProps) {
           onFocusCapture={() => setPopoverOpened(true)}
           onBlurCapture={() => setPopoverOpened(false)}
         >
-          <PasswordInput
-            withAsterisk
-            label={props.children ? props.children : "Password"}
-            placeholder="Your password"
-            value={value}
-            onChange={(event) => setValue(event.currentTarget.value)}
-            style={props}
-            leftSection={icons__lockIcon}
-          />
+          <AuthenticationWrapper usesCustomSetState={true}>
+            <PasswordInput
+              label={props.children ? props.children : 'Password'}
+              placeholder="Your password"
+              value={value}
+              onChange={(event) => setValue(event.currentTarget.value)}
+              style={props}
+              leftSection={icons__lockIcon}
+              name="password"
+              styles={{
+                input:
+                  strength === 100
+                    ? {
+                        borderColor: 'var(--input-success-color)',
+                        backgroundColor:
+                          'var(--input-success-background-color)',
+                        color: 'var(--input-success-color)',
+                        transition: 'all 150ms ease-in-out',
+                      }
+                    : {
+                        transition: 'all 150ms ease-in-out',
+                      },
+              }}
+            />
+          </AuthenticationWrapper>
         </div>
       </Popover.Target>
       <Popover.Dropdown>

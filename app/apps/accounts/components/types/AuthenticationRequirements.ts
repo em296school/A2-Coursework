@@ -1,0 +1,1 @@
+export type UndefinedAuthenticationRequirement = Record<string, (input: string) => boolean>;

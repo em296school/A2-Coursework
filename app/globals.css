@@ -1,7 +1,14 @@
+:root {
+  --text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.05);
+  --input-success-color: #02892F;
+  --input-success-background-color: #F6FFF8;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }

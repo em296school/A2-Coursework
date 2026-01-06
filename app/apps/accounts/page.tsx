@@ -9,7 +9,7 @@ export default function Accounts({ params }: Props) {
   const { subdomain } = params;
 
   if (true) {
-    redirect('/apps/accounts/login');
+    redirect('/apps/accounts/signup');
   }
   return (
     <div>
