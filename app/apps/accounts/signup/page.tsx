@@ -30,6 +30,7 @@ import React from 'react';
 import { IconLock, IconUser } from '@tabler/icons-react';
 import { AccountRegistrationProvider } from '../components/context/AccountRegistrationContext';
 import VerifyEmail from './components/VerifyEmail';
+import generateToken from '@/app/utility/generateToken';
 
 // Export the Login page component
 // todo: prefers-reduced-motion
@@ -105,7 +106,7 @@ export default function Login() {
             </Stack>
           </Stepper.Step>
           <Stepper.Step label="Final step" description="Final step">
-            <VerifyEmail challenge="sample-challenge-token" />
+            <VerifyEmail challenge={generateToken(64)} objective='...' />
           </Stepper.Step>
           <Stepper.Step label="Final step" description="Final step">
             <div>PASSED SIGNUP</div>

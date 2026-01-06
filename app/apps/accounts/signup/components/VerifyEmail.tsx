@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
+import LoadingEmail from './LoadingEmail';
 
-export default function VerifyEmail({ challenge }: { challenge: string }) {
+export default function VerifyEmail({ challenge, objective }: { challenge: string, objective: string }) {
   const [fetched, setFetchState] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const hasFetchedRef = useRef(false);
@@ -14,11 +15,12 @@ export default function VerifyEmail({ challenge }: { challenge: string }) {
     const verifyEmail = async () => {
       try {
         const response = await fetch(
-          `/api/accounts/verify-email?challenge=${challenge}`,
+          `/api/accounts/verify-email?challenge=${challenge}&objective=${objective}`,
           {
             method: 'GET',
           }
         );
+        console.log(response);
       } catch (error) {
         setError('An error occurred while verifying your email.');
       } finally {
@@ -31,7 +33,7 @@ export default function VerifyEmail({ challenge }: { challenge: string }) {
     }
   }, [challenge, fetched]);
 
-  return (
-    <div>{(fetched && <p>Fetched!</p>) || <p>Verifying your email...</p>}</div>
+  return !fetched ? <LoadingEmail /> : (
+    <LoadingEmail />
   );
 }
