@@ -29,6 +29,7 @@ import React from 'react';
 
 import { IconLock, IconUser } from '@tabler/icons-react';
 import { AccountRegistrationProvider } from '../components/context/AccountRegistrationContext';
+import VerifyEmail from './components/VerifyEmail';
 
 // Export the Login page component
 // todo: prefers-reduced-motion
@@ -43,7 +44,6 @@ export default function Login() {
     signUpStep > 1 && setSignUpStep(signUpStep - 1);
   };
 
-  console.log('rerendering')
   return (
     <div>
       <div
@@ -105,7 +105,7 @@ export default function Login() {
             </Stack>
           </Stepper.Step>
           <Stepper.Step label="Final step" description="Final step">
-            <div>EMAIL VERIFY</div>
+            <VerifyEmail challenge="sample-challenge-token" />
           </Stepper.Step>
           <Stepper.Step label="Final step" description="Final step">
             <div>PASSED SIGNUP</div>
