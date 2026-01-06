@@ -9,7 +9,7 @@ export default function Accounts({ params }: Props) {
   const { subdomain } = params;
 
   if (true) {
-    redirect('/apps/accounts/signup');
+    redirect('https://accounts.greenglide-airlines.com/signup');
   }
   return (
     <div>
