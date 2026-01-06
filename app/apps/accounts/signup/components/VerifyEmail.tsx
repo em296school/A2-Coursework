@@ -15,12 +15,12 @@ export default function VerifyEmail({ challenge, objective }: { challenge: strin
     const verifyEmail = async () => {
       try {
         const response = await fetch(
-          `/api/accounts/verify-email?challenge=${challenge}&objective=${objective}`,
+          `/api/accounts/verify-email?challenge=${encodeURIComponent(challenge)}&objective=${encodeURIComponent(objective)}`,
           {
             method: 'GET',
           }
         );
-        console.log(response);
+        console.log(response.ok);
       } catch (error) {
         setError('An error occurred while verifying your email.');
       } finally {
