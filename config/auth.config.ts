@@ -50,5 +50,6 @@ export function nameIsValid(name: string): boolean {
   // (so we don't have stuff like Name--Name or ' Name')
   const nameRegex =
     /^(?!.*[ '-]{2})[A-Za-zÀ-ÖØ-öø-ÿ]+(?:[ '-][A-Za-zÀ-ÖØ-öø-ÿ]+)*$/;
+  const otherRegex = /^\d{6}$/;
   return nameRegex.test(name);
 }
