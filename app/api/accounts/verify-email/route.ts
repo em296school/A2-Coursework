@@ -27,13 +27,13 @@ export async function GET(request: Request) {
 
   // Try connect and save the key
   try {
-    await connect(process.env.MONGODB_URI as string);
+    /**await connect(process.env.MONGODB_URI as string);
     const challengeDoc = new EmailChallengeModel({
       objective: objective,
       authenticationCode: key,
     });
 
-    await challengeDoc.save();
+    await challengeDoc.save();**/
     const { data, error } = await resend.emails.send({
       from: '2FA <messages@greenglide-airlines.com>',
       to: [objective],
