@@ -27,25 +27,23 @@ export async function GET(request: Request) {
 
   // Try connect and save the key
   try {
-    /**await connect(process.env.MONGODB_URI as string);
+    await connect(
+      'mongodb+srv://admin:xgWQNOHXT0TrCb5g@greenglide.smp4sg1.mongodb.net/?appName=GreenGlide'
+    );
     const challengeDoc = new EmailChallengeModel({
       objective: objective,
       authenticationCode: key,
     });
 
-    await challengeDoc.save();**/
-    const { data, error } = await resend.emails.send({
+    await challengeDoc.save();
+    /**const { data, error } = await resend.emails.send({
       from: '2FA <messages@greenglide-airlines.com>',
       to: [objective],
       subject: '[OTP] Email Verification Code',
       react: OTPEmail({ code: key }),
-    });
-
-    if (error) {
-      return NextResponse.json({ error }, { status: 500 });
-    }
-    return NextResponse.json(data);
+    });**/
+    return NextResponse.json({ status: 200 });
   } catch (error) {
-    return NextResponse.json({ error }, { status: 500 });
+    return NextResponse.json({ error: error }, { status: 500 });
   }
 }
