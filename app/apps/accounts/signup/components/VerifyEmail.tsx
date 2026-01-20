@@ -1,7 +1,13 @@
 import { useEffect, useState, useRef } from 'react';
 import LoadingEmail from './LoadingEmail';
 
-export default function VerifyEmail({ challenge, objective }: { challenge: string, objective: string }) {
+export default function VerifyEmail({
+  challenge,
+  objective,
+}: {
+  challenge: string;
+  objective: string;
+}) {
   const [fetched, setFetchState] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const hasFetchedRef = useRef(false);
@@ -21,6 +27,7 @@ export default function VerifyEmail({ challenge, objective }: { challenge: strin
           }
         );
         console.log(response.ok);
+        console.log(response.json());
       } catch (error) {
         setError('An error occurred while verifying your email.');
       } finally {
@@ -33,7 +40,5 @@ export default function VerifyEmail({ challenge, objective }: { challenge: strin
     }
   }, [challenge, fetched]);
 
-  return !fetched ? <LoadingEmail /> : (
-    <LoadingEmail />
-  );
+  return !fetched ? <LoadingEmail /> : <LoadingEmail />;
 }
