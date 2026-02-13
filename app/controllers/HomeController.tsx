@@ -15,6 +15,7 @@ export default async function Home() {
     telephone: '0755',
   });
 
+  console.log('trying to sdave');
   doc
     .save()
     .then(() => {
