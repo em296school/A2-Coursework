@@ -1,0 +1,101 @@
+{
+    "SELLABLE_BUNDLES": {
+        "Premium+": "PREMIUM_PLUS",
+        "Premium": "PREMIUM",
+        "Basic": "BASIC"
+    },
+    "COSTS": {
+        "early_boarding": 28,
+        "extra_luggage": 22,
+        "meal_service": 18,
+        "business": 44,
+        "economy_plus": 32,
+        "economy": 12
+    },
+    "NAMES": {
+        "early_boarding": "Early boarding",
+        "extra_luggage": "Extra luggage",
+        "meal_service": "Meal service",
+        "business": "Business class",
+        "economy_plus": "Economy+ class",
+        "economy": "Economy class"
+    },
+    "PREMIUM_PLUS": {
+        "NAME": "PREMIUM_PLUS",
+        "PRE_SET": [
+            {
+                "TEXT": "Early boarding",
+                "OPTION": [
+                    "early_boarding",
+                    true
+                ]
+            },
+            {
+                "TEXT": "Meal service",
+                "OPTION": [
+                    "meal_service",
+                    true
+                ]
+            },
+            {
+                "TEXT": "Business class",
+                "OPTION": [
+                    "seat_group",
+                    "business"
+                ]
+            },
+            {
+                "TEXT": "Extra luggage",
+                "OPTION": [
+                    "extra_luggage",
+                    true
+                ]
+            }
+        ]
+    },
+    "PREMIUM": {
+        "NAME": "PREMIUM",
+        "PRE_SET": [
+            {
+                "TEXT": "Meal service",
+                "OPTION": [
+                    "meal_service",
+                    true
+                ]
+            },
+            {
+                "TEXT": "Economy Plus class",
+                "OPTION": [
+                    "seat_group",
+                    "economy_plus"
+                ]
+            },
+            {
+                "TEXT": "Extra luggage",
+                "OPTION": [
+                    "extra_luggage",
+                    true
+                ]
+            }
+        ]
+    },
+    "BASIC": {
+        "NAME": "BASIC",
+        "PRE_SET": [
+            {
+                "TEXT": "Economy class",
+                "OPTION": [
+                    "seat_group",
+                    "economy"
+                ]
+            },
+            {
+                "TEXT": "Meal service",
+                "OPTION": [
+                    "meal_service",
+                    true
+                ]
+            }
+        ]
+    }
+}

@@ -1,44 +1,35 @@
-import mongoose from 'mongoose';
 import Navigator from '../views/Navigator';
 import { connectDB } from '@/lib/mongoose';
-import { Accounts } from '../models/Accounts';
+import { NextURLSearchParams } from '@/app/types/URLs.types';
 
-export default async function Home() {
+import FlightsDisplay from '../views/home/Flights/FlightsDisplay';
+import { signIntoAccountWithCookie } from '@/lib/userAccount';
+import NavigationProfile from '../views/home/Profile/NavigationProfile';
+
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: NextURLSearchParams;
+}) {
   await connectDB();
 
-  let doc = new Accounts({
-    user_id: '1',
-    first_name: 'John',
-    last_name: 'Cena',
-    email: 'johncena@gmail.com',
-    password: 'not_secure',
-    telephone: '0755',
-  });
-
-  console.log('trying to sdave');
-  doc
-    .save()
-    .then(() => {
-      console.log('SAVED');
-    })
-    .catch(() => {
-      console.log('smth wnet wrong');
-    });
+  const account = await signIntoAccountWithCookie();
 
   return (
     <>
-      <Navigator signedIn={false} />
-      <h1 className="text-9xl">Hi</h1>
-      <h1 className="text-9xl">Hi</h1>
-      <h1 className="text-9xl">Hi</h1>
-      <h1 className="text-9xl">Hi</h1>
-      <h1 className="text-9xl">Hi</h1>
-      <h1 className="text-9xl">Hi</h1>
-      <h1 className="text-9xl">Hi</h1>
-      <h1 className="text-9xl">Hi</h1>
-      <h1 className="text-9xl">Hi</h1>
-      <h1 className="text-9xl">Hi</h1>
-      <h1 className="text-9xl">Hi</h1>
+      {account ? (
+        <Navigator isStaff={account.is_staff}>
+          <NavigationProfile
+            first_name={account.first_name}
+            last_name={account.last_name}
+            is_staff={account.is_staff}
+            is_admin={account.is_admin}
+          />
+        </Navigator>
+      ) : (
+        <Navigator />
+      )}
+      <FlightsDisplay searchParams={searchParams} />
     </>
   );
 }

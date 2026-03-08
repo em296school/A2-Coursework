@@ -1,14 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat+Brush&display=swap');
 @import 'tailwindcss';
 
 @theme {
-  --color-gg-green: rgba(0, 153, 63, 1);
+  --color-gg-green: rgba(13, 84, 43, 1);
   --font-weight-semimedium: 450;
   --text-size-1.5xl: 1.3rem,
 
-  --color-button-primary: rgba(0, 153, 63, 1);
+  --color-button-primary: rgba(13, 84, 43, 1);
   --color-button-secondary: rgba(86, 86, 86, 1);
-  --color-button-success: rgba(44, 204, 86, 1);
+  --color-button-success: rgba(13, 84, 43, 1);
   --color-button-danger: rgba(222, 67, 86, 1);
 }
 
@@ -22,7 +23,11 @@
   }
 }
 
-.font-main {
+.font-gg-title {
+  font-family: "Caveat Brush", cursive;
+}
+
+* {
     font-family: "Spline Sans", sans-serif;
 }
 

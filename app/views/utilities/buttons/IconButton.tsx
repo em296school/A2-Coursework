@@ -25,6 +25,8 @@ export default function IconButton({
   buttonStyle,
   icon,
   width,
+  disabled,
+  onClick,
 }: IconButtonProps) {
   return (
     <Button
@@ -35,6 +37,8 @@ export default function IconButton({
       leftSection={icon}
       color={ButtonStyles[buttonStyle]}
       radius={'md'}
+      onClick={onClick}
+      disabled={disabled}
     >
       {children}
     </Button>

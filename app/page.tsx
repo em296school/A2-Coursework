@@ -1,8 +1,13 @@
+import { NextURLSearchParams } from './types/URLs.types';
 import Home from './controllers/HomeController';
-export default function Page() {
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: NextURLSearchParams;
+}) {
   return (
     <>
-      <Home />
+      <Home searchParams={searchParams} />
     </>
   );
 }

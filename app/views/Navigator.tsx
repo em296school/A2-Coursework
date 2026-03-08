@@ -5,23 +5,44 @@ import { UserIcon } from './icons/UserIcon';
 import LogoPNG from '@/public/logo.png';
 
 interface NavigatorProps {
-  signedIn: boolean;
+  children?: React.ReactElement;
+  isStaff?: boolean;
 }
-export default function Navigator({ signedIn }: NavigatorProps) {
+export default function Navigator({ children, isStaff }: NavigatorProps) {
   return (
-    <NavigationBar user_is_signedIn={signedIn}>
+    <NavigationBar>
       <NavigationBar.Emblem scale={25}>{LogoPNG}</NavigationBar.Emblem>
-      <NavigationBar.Button clickPath="/">About</NavigationBar.Button>
-      <NavigationBar.Button clickPath="/">Account</NavigationBar.Button>
-      <NavigationBar.Button clickPath="/">Inbox</NavigationBar.Button>
+      <NavigationBar.Button clickPath="/about">About</NavigationBar.Button>
+      <NavigationBar.Button clickPath="/account">Account</NavigationBar.Button>
       <NavigationBar.Button clickPath="/">Flights</NavigationBar.Button>
+      {isStaff ? (
+        <NavigationBar.Button clickPath="/staff">
+          Staff Dashboard
+        </NavigationBar.Button>
+      ) : (
+        <></>
+      )}
       <NavigationBar.Docket>
-        <IconButton icon={<UserIcon />} buttonStyle="secondary">
-          Log in
-        </IconButton>
-        <IconButton icon={<UserIcon />} buttonStyle="primary" width="20px">
-          Sign up
-        </IconButton>
+        {children ? (
+          <>{children}</>
+        ) : (
+          <>
+            <a href="/login" rel="noreferrer">
+              <IconButton icon={<UserIcon />} buttonStyle="secondary">
+                Log in
+              </IconButton>
+            </a>
+            <a href="/signup" rel="noreferrer">
+              <IconButton
+                icon={<UserIcon />}
+                buttonStyle="primary"
+                width="20px"
+              >
+                Sign up
+              </IconButton>
+            </a>
+          </>
+        )}
       </NavigationBar.Docket>
     </NavigationBar>
   );

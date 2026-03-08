@@ -1,0 +1,12 @@
+{
+    "ALLOWED_AIRPORTS": [
+        "Belfast",
+        "Edinburgh",
+        "London",
+        "Cardiff",
+        "Dublin",
+        "Cork"
+    ],
+    "MINIMUM_FLIGHT_PRICE": 30,
+    "MAXIMUM_FLIGHT_PRICE": 200
+}

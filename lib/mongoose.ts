@@ -15,7 +15,6 @@ if (!cached) {
 export async function connectDB() {
   if (!cached) return;
   if (cached.conn) return cached.conn;
-  console.log(MONGODB_URI);
 
   if (!cached.promise) {
     cached.promise = connect(MONGODB_URI as string).then(

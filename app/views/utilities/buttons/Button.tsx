@@ -13,4 +13,6 @@ import { ButtonStyleSetting } from '../../settings/ButtonStyleSettings.config';
 export interface UtilityButton {
   width?: string;
   buttonStyle: ButtonStyleSetting;
+  onClick?: () => void;
+  disabled?: boolean;
 }

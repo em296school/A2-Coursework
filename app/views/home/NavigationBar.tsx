@@ -15,8 +15,6 @@ import React from 'react';
 
 // Types
 export interface NavigationBarProps {
-  full_name?: string;
-  user_is_signedIn: boolean;
   children: React.ReactElement[];
 }
 
@@ -53,11 +51,7 @@ function selectPropsForFloating(isFloating: boolean): {
 }
 
 // Component
-function NavigationBar({
-  full_name,
-  user_is_signedIn,
-  children,
-}: NavigationBarProps) {
+function NavigationBar({ children }: NavigationBarProps) {
   // Detect if the user has scrolled down (and if so let
   // the Component know we must follow them.)
   const navBarIsFloating = useSticky(10);
