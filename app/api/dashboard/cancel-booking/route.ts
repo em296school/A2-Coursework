@@ -19,8 +19,7 @@ export async function POST(request: Request) {
   const { bookingId }: { bookingId: string } = await request.json();
   const account = await signIntoAccountWithCookie();
 
-  console.log(bookingId);
-  if (!account || (account && !account.is_staff)) {
+  if (!account || (account && !account.is_admin)) {
     return Response.json(
       {
         ok: false,

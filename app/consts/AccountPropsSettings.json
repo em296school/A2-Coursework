@@ -8,15 +8,15 @@
         "HINT": "Needs at least 1 character and under 40 characters."
     },
     "EMAIL": {
-        "REGEX": "^(?=.{7,254}$)[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+        "REGEX": "^(?=.{7,100}$)[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
         "HINT": "Email should be in the format xxxxxxx@xxxxx.xxx."
     },
     "TELEPHONE": {
         "REGEX": "^(\\+44\\s?7\\d{3}|\\(?07\\d{3}\\)?)\\s?\\d{3}\\s?\\d{3}$",
-        "HINT": "Invalid telephone number."
+        "HINT": "Expected to begin with 07 or +44, and be 10-11 characters."
     },
     "PASSWORD": {
-        "REGEX": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,50}$",
+        "REGEX": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&^])[A-Za-z\\d@$!%*?&^]{8,50}$",
         "HINT": "Expects between 8 and 50 characters, 1 upper case, 1 number and special character."
     }
 }

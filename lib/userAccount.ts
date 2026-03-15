@@ -9,6 +9,9 @@ import { SessionProps, Sessions } from '@/app/models/Sessions';
 import argon2 from 'argon2';
 import { createHash, randomBytes } from 'crypto';
 import { cookies } from 'next/headers';
+import Snowflakify from 'snowflakify';
+
+const snowflakify = new Snowflakify();
 
 export type SignInProps = Promise<AccountProps | false>;
 
@@ -43,10 +46,11 @@ export async function verifyPassword(dbHash: string, plainPassword: string) {
 async function generateUserId() {
   // Create a simple len(entries) + 1 user id for simplicity
   // of the project
-  const accounts = await Accounts.countDocuments();
-  const userId = accounts + 1;
+  //const accounts = await Accounts.countDocuments();
+  //const userId = accounts + 1;
 
-  return userId;
+  const userId = snowflakify.nextId();
+  return Number(userId);
 }
 
 export async function getUserAccount(

@@ -36,7 +36,7 @@ export async function POST(request: Request) {
   // Try find the flight and if so, cancel it
   // and notify all bookings subscribed to it
   try {
-    const flight = await Flights.findOne({
+    const flight: FlightProps = await Flights.findOne({
       flight_id: flightId,
     }).exec();
 
@@ -45,6 +45,19 @@ export async function POST(request: Request) {
         {
           ok: false,
           message: 'Flight does not exist.',
+        },
+        {
+          status: 400,
+        }
+      );
+    }
+
+    // Check if the flight has already departed.
+    if (new Date() > new Date(flight.flight_info.departure_date)) {
+      return Response.json(
+        {
+          ok: false,
+          message: 'Flight has already departed.',
         },
         {
           status: 400,

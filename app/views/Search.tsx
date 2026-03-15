@@ -189,7 +189,7 @@ export function Search({ href }: { href: string }) {
   }
 
   const searchElements = [
-    SearchBar('Destination', 'location'),
+    SearchBar('Location', 'location'),
     Range('Date', 'min_date', 'max_date', 'From', 'To'),
     Slider('Price', 'min_price', 'max_price'),
   ];

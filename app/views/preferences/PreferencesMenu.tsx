@@ -3,6 +3,7 @@ import { AirplaneProps } from '@/app/models/Airplanes';
 import { FlightProps } from '@/app/models/Flights';
 import { PreferencesAirplaneSeating } from './PreferencesAirplaneSeating';
 import { PreferencesSubtotal } from './PreferencesSubtotal';
+import { MAX_PASSENGERS } from '@/app/consts/PassengersSettings.json';
 import {
   EssentialOptionsProps,
   PreferencesEssentialOptions,
@@ -47,7 +48,10 @@ export function PreferencesMenu(props: PreferencesMenuProps) {
     });
 
   function canSubmitForm(): boolean {
-    if (personPreferences.length == 0) {
+    if (
+      personPreferences.length == 0 ||
+      personPreferences.length > MAX_PASSENGERS
+    ) {
       setErrorMessage('You need at least one passenger to make a booking.');
       return false;
     }

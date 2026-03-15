@@ -151,7 +151,7 @@ export function PreferencesAdditionalOptions({
       <div className="flex flex-col gap-1 h-fit w-full my-2">
         {personPreferences.map((passenger) => {
           return (
-            <div className="rounded-md shadow-lg w-full h-20 bg-white p-2 border border-black/10">
+            <div className="rounded-md shadow-lg w-full min-h-20 max-h-25 bg-white p-2 border border-black/10">
               <div className="flex flex-row justify-start">
                 <h2 className="text-lg font-semibold w-100">
                   {passenger.last_name.toUpperCase()}, {passenger.first_name}

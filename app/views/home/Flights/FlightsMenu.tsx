@@ -9,6 +9,7 @@ import { UsersIcon } from '../../icons/UsersIcon';
 import { LayersIcon } from '../../icons/LayersIcon';
 import { useRouter } from 'next/navigation';
 import { dateToShortString } from '@/app/helpers/dateToShortString';
+import { CrossIcon } from '../../icons/CrossIcon';
 
 // Types
 export interface FlightsMenuProps {
@@ -37,20 +38,24 @@ export function FlightsMenu({ children }: FlightsMenuProps) {
 
 export function Flight(props: FlightListOptionProps) {
   const router = useRouter();
+  const hasDeparted = new Date() > new Date(props.flight_info.departure_date);
+  const startsFrom = props.startsFrom || 0;
+  const imagePath = `/cities/${props.flight_info.arrival_location.toLowerCase()}.png`;
 
   function beginBooking() {
+    if (hasDeparted) return;
     router.push(
       `/booking?date=${props.flight_info.departure_date.getTime()}&departure=${props.flight_info.departure_location}&arrival=${props.flight_info.arrival_location}`
     );
   }
 
-  const startsFrom = props.startsFrom || 0;
-  const imagePath = `/cities/${props.flight_info.arrival_location.toLowerCase()}.png`;
-
   return (
     <div
       onClick={beginBooking}
-      className="select-none group h-63 overflow-hidden bg-white shadow-md/10 rounded-lg outline-gg-green shadow-black w-83 hover:shadow-xl/20 transition-all duration-200"
+      className={`select-none group h-63 overflow-hidden bg-white shadow-md/10 rounded-lg outline-gg-green shadow-black w-83 hover:shadow-xl/20 transition-all duration-200 ${hasDeparted ? 'cursor-not-allowed' : 'cursor-pointer'}`}
+      style={{
+        opacity: hasDeparted ? 0.3 : 1,
+      }}
     >
       <img
         src={imagePath}
@@ -82,10 +87,17 @@ export function Flight(props: FlightListOptionProps) {
           <h2 className="flex items-start w-full">
             {dateToShortString(props.flight_info.departure_date)}
           </h2>
-          <h2 className="flex items-center justify-end gap-2 w-full text-gg-green">
-            <LayersIcon size={15} />
-            {props.flightsThisDay || 0} flights available
-          </h2>
+          {hasDeparted ? (
+            <h2 className="flex items-center justify-end gap-2 w-full text-button-danger">
+              <CrossIcon size={15} />
+              Flight has departed
+            </h2>
+          ) : (
+            <h2 className="flex items-center justify-end gap-2 w-full text-gg-green">
+              <LayersIcon size={15} />
+              {props.flightsThisDay || 0} flights available
+            </h2>
+          )}
         </span>
       </div>
     </div>

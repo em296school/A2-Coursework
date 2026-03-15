@@ -11,9 +11,14 @@ import {
   Transactions,
   TransactionsProps,
 } from '@/app/models/Transactions';
+import { generateMessageId, sendInboxMessage } from '@/lib/inbox';
 import { connectDB } from '@/lib/mongoose';
 import { createTransactionID, createTransactionLog } from '@/lib/transactions';
 import { signIntoAccountWithCookie } from '@/lib/userAccount';
+
+function createCancellationMessage(booking: BookingProps, flight: FlightProps) {
+  return `You have cancelled your booking from ${flight.flight_info.departure_location} to ${flight.flight_info.arrival_location} on ${flight.flight_info.departure_date.toDateString()} at ${flight.flight_info.departure_date.toLocaleTimeString()}. If you believe this is a mistake, please visit https://greenglide-airlines.com/account and change your password!`;
+}
 
 export async function POST(request: Request) {
   await connectDB();
@@ -63,6 +68,11 @@ export async function POST(request: Request) {
     );
   }
 
+  // Find the flight:
+  const flight: FlightProps = await Flights.findOne({
+    flight_id: booking.flight_id,
+  }).exec();
+
   // Cancel the booking and remove any
   // associated records with it
   try {
@@ -104,6 +114,18 @@ export async function POST(request: Request) {
         metadata: {},
       }).save();
     }
+
+    // Report to the user that they have made this cancellation:
+    await sendInboxMessage(account.user_id, {
+      author: 'system',
+      message_id: await generateMessageId(0, account.user_id),
+      timestamp: new Date().getTime(),
+      unread: true,
+      message: {
+        title: `You have cancelled your flight to ${flight.flight_info.arrival_location}`,
+        contents: createCancellationMessage(booking, flight),
+      },
+    });
   } catch {
     return Response.json(
       {

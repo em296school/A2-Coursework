@@ -147,9 +147,10 @@ export default function BookingTimeSelectMenu({
 
               // Get the info for the element
               let soldSeats = getSoldSeats(flight.flight_id, bookings);
-              let isCheapest = flight.isCheapest;
               let isAlmostSoldOut =
                 Number(soldSeats) / Number(max_capacity) > 0.8;
+
+              let isCheapest = flight.isCheapest;
               let departureDate = flight.flight_info.departure_date;
               let timeOfDay = getTimeOfDay(departureDate);
               let icon =

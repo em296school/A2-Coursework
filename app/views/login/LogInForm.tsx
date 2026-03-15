@@ -43,6 +43,13 @@ export default function LogInForm() {
     const validator = new Validator(details);
     const formIsValid = validator.validateLogIn();
 
+    function reset(message?: string) {
+      setErrorMessage(message || 'Could not sign in at this time.');
+      if (!opened) toggle();
+
+      setTryingToLogIn(false);
+    }
+
     if (formIsValid) {
       setTryingToLogIn(true);
 
@@ -55,21 +62,17 @@ export default function LogInForm() {
         const result = await response.json();
         if (!response.ok) {
           let message = result.message;
-          setErrorMessage(message || 'Could not sign in at this time.');
-          if (!opened) toggle();
-
-          setTryingToLogIn(false);
+          reset(message);
           return;
         }
 
         router.push('/');
       } catch (err: Error | any) {
         let message = err?.message;
-        setErrorMessage(message || 'Could not sign up at this time.');
-        if (!opened) toggle();
-
-        setTryingToLogIn(false);
+        reset(message);
       }
+    } else {
+      reset('You have a missing, or invalid field.');
     }
   }
 

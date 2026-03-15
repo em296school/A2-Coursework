@@ -3,6 +3,7 @@ import { formatToName } from '@/app/helpers/formatToName';
 import { generateBookingId } from '@/app/helpers/getBookingId';
 import { getSeatIsTaken } from '@/app/helpers/getSeatIsTaken';
 import { AirplaneProps, Airplanes } from '@/app/models/Airplanes';
+import { MAX_PASSENGERS } from '@/app/consts/PassengersSettings.json';
 import {
   BookingProps,
   Bookings,
@@ -121,6 +122,22 @@ export async function POST(request: Request) {
       );
     }
 
+    // Check if the passengers are within range:
+    if (
+      booking.person_options.length == 0 ||
+      booking.person_options.length > MAX_PASSENGERS
+    ) {
+      return Response.json(
+        {
+          ok: false,
+          message: 'Impossible booking option submitted.',
+        },
+        {
+          status: 400,
+        }
+      );
+    }
+
     // Seat(s) is/are available:
     let seatIsNotAvailable = false;
     for (let person of booking.person_options) {
@@ -134,6 +151,22 @@ export async function POST(request: Request) {
     }
 
     if (seatIsNotAvailable) {
+      return Response.json(
+        {
+          ok: false,
+          message: 'Impossible booking option submitted.',
+        },
+        {
+          status: 400,
+        }
+      );
+    }
+
+    // Flight has not departed
+    const flightDeparted =
+      new Date() > new Date(flight.flight_info.departure_date);
+
+    if (flightDeparted) {
       return Response.json(
         {
           ok: false,
@@ -193,7 +226,7 @@ export async function POST(request: Request) {
       timestamp: new Date().getTime(),
       unread: true,
       message: {
-        title: 'You have made a booking!',
+        title: `Receipt ID: ${bookingSchemaSend.booking_id} • You have made a booking! • Flight ID: ${flight.flight_id}`,
         contents: createNiceMessageForInbox(bookingSchemaSend, flight),
       },
     });

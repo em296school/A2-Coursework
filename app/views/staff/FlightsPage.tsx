@@ -93,7 +93,7 @@ async function fetchFlights(
   try {
     const response = await fetch('/api/dashboard/get-flights', {
       body: JSON.stringify(filterOptions),
-      method: 'GET',
+      method: 'POST',
     });
 
     if (!response.ok) {
@@ -106,6 +106,7 @@ async function fetchFlights(
     setSearching(false);
     setFlights(result);
   } catch (err) {
+    console.log(err);
     setSearching(false);
     setFlights([]);
   }
