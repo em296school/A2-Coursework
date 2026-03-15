@@ -198,7 +198,8 @@ export async function tryMakeAccount(
     existing = await Accounts.findOne({
       $or: [{ email: email }, { telephone: telephone }],
     });
-  } catch {
+  } catch (err) {
+    console.log(err);
     throw new Error('Unable to check account information at this time.');
   }
 
