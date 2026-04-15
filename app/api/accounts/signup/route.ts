@@ -2,12 +2,15 @@ import Validator from '@/app/controllers/Validator/Validator';
 import { AccountProps } from '@/app/models/Accounts';
 import { RegistrationFormProps } from '@/app/types/Accounts.types';
 import { generateMessageId, sendInboxMessage } from '@/lib/inbox';
+import { connectDB } from '@/lib/mongoose';
 import { tryMakeAccount } from '@/lib/userAccount';
 
 const WELCOME_MESSAGE =
   "We're so glad to welcome you to GreenGlide Airlines. We aim to provide a sustainably-driven travel agent for customers across the UK and Ireland. Get started by browsing our flights.";
 
 export async function POST(request: Request) {
+  await connectDB();
+
   const accountInfo: Partial<RegistrationFormProps> = await request.json();
   const validator = new Validator(accountInfo);
 

@@ -13,6 +13,7 @@ if (!cached) {
 }
 
 export async function connectDB() {
+  console.warn('trying tio connect');
   if (!cached) return;
   if (cached.conn) return cached.conn;
 
