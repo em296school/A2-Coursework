@@ -1,6 +1,6 @@
 import mongoose, { connect, Connection, mongo } from 'mongoose';
 
-const MONGODB_URI = process.env.MONGODB_URI;
+const MONGODB_URI = process.env.STORAGE_MONGODB_URI;
 
 if (!MONGODB_URI) {
   throw new Error('No MONGODB_URI specified.');
