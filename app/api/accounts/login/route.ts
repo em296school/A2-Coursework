@@ -1,9 +1,11 @@
 import Validator from '@/app/controllers/Validator/Validator';
 import { AccountProps } from '@/app/models/Accounts';
 import { LogInFormProps } from '@/app/types/Accounts.types';
+import { connectDB } from '@/lib/mongoose';
 import { signIntoAccount, tryMakeAccount } from '@/lib/userAccount';
 
 export async function POST(request: Request) {
+  await connectDB();
   const accountInfo: LogInFormProps = await request.json();
   const validator = new Validator(accountInfo);
 

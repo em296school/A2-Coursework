@@ -1,6 +1,9 @@
+import { connectDB } from '@/lib/mongoose';
 import { logOut } from '@/lib/userAccount';
 
 export async function POST(request: Request) {
+  await connectDB();
+
   try {
     const success = await logOut();
 
