@@ -23,5 +23,6 @@ export async function connectDB() {
   }
 
   cached.conn = await cached.promise;
+  console.warn('LOGGED INTO MONGODB.');
   return cached.conn;
 }
