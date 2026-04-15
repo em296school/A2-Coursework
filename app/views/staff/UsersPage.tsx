@@ -150,7 +150,7 @@ function User(account: FoundUserProps & { key: number; isDisabled?: boolean }) {
     const text = element.value;
     const validator = new Validator(text);
 
-    if (validator.validateSendMessage()) {
+    if (!validator.validateSendMessage()) {
       alert(
         `Message must be between ${MINIMUM_MESSAGE_LENGTH} and ${MAXIMUM_MESSAGE_LENGTH} characters.`
       );

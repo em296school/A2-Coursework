@@ -72,7 +72,11 @@ export async function POST(request: Request) {
 
   // If we are a staff member updating, the target user cannot be a fellow
   // staff and we must be staff ourself
-  if (!edits.isSelfSubmit && (targetAccount.is_staff || !account.is_staff)) {
+  if (
+    !account.is_admin &&
+    !edits.isSelfSubmit &&
+    (targetAccount.is_staff || !account.is_staff)
+  ) {
     return Response.json(
       {
         ok: false,

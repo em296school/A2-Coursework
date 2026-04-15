@@ -2,6 +2,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Caveat+Brush&display=swap');
 @import 'tailwindcss';
 
+[data-nextjs-dev-overlay] {
+  display: none !important;
+}
+
 @theme {
   --color-gg-green: rgba(13, 84, 43, 1);
   --font-weight-semimedium: 450;
